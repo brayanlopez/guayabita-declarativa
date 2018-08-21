@@ -1,0 +1,46 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+
+using namespace std;
+
+int lanzarDado(){
+	return (rand()%6)+1;
+}
+
+int turno (int tiro, int saldo){
+	if (tiro==1 or tiro==6){
+		cout<<saldo<<endl;
+		return saldo - 100;
+	}
+	else{
+		if(tiro<lanzarDado()){
+			cout<<saldo<<endl;
+			return saldo + 100;	
+		}else{
+			cout<<saldo<<endl;
+			return saldo - 100;		
+		}
+	}
+}
+
+int juego(int saldo1, int saldo2){
+	if (saldo1<=0 and saldo2<=0)
+		return -1;
+	if (saldo1>=0 and saldo2<=0)
+		return 1;
+	if (saldo1<=0 and saldo2>=0)
+		return 2;
+	else{
+		juego (turno(lanzarDado(), saldo1),turno(lanzarDado(), saldo2));
+	}
+}
+
+int main(){
+	srand(time(NULL));
+	
+
+	cout<<juego(1000,1000)<<endl;
+	
+	return 0;
+}
